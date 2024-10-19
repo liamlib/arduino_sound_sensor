@@ -7,18 +7,15 @@ int sound_sensor = A0;
 int counter = 0;
 bool lightOn = false;
 unsigned long lastClapTime = 0;
-const unsigned long clapTimeout = 2000;  // 2 seconds to detect second clap
-const unsigned long maxIntervalBetweenClaps = 1000;  // 1 second max interval for valid double clap
+const unsigned long clapTimeout = 2000; 
+const unsigned long maxIntervalBetweenClaps = 1000; 
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(sound_sensor, INPUT);
-  // pinMode(ldrPin, INPUT); 
   Serial.begin(9600); 
   Servo1.attach(servoPin); 
   Servo1.write(150); 
-
-
 }
 
 void loop() {
@@ -36,20 +33,17 @@ void loop() {
   
     delay(200);  
   }
-
   
   if (counter == 2) {
     if (currentTime - lastClapTime <= clapTimeout) {
       lightOn = !lightOn;
       digitalWrite(LED_BUILTIN, lightOn ? HIGH : LOW);
-            Servo1.write(lightOn ? 110: 180);
-
+      Servo1.write(lightOn ? 110: 180);
       Serial.println(lightOn ? "Light ON" : "Light OFF");
     }
     counter = 0;  
   }
 
-  
   if (currentTime - lastClapTime > clapTimeout) {
     counter = 0;
   }
