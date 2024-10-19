@@ -2,7 +2,6 @@
 
 int servoPin = 3; 
 Servo Servo1; 
-
 int sound_sensor = A0; 
 int counter = 0;
 bool lightOn = false;
@@ -28,7 +27,6 @@ void loop() {
     } else {
       counter = 1;  
     }
-
     lastClapTime = currentTime;
   
     delay(200);  
